@@ -6,10 +6,10 @@ Arquitectura distribuida con **sockets TCP** en Python: clientes, balanceador de
 
 | Archivo | Rol |
 |---------|-----|
-| `cliente.py` | Envùa tareas y recibe resultados |
+| `cliente.py` | Env√≠a tareas y recibe resultados |
 | `balanceador.py` | Simula Nginx/HAProxy; distribuye tareas entre workers |
 | `worker.py` | Servidor worker con pool de hilos que procesa tareas |
-| `protocolo.py` | Utilidades compartidas de comunicaciùn JSON por socket |
+| `protocolo.py` | Utilidades compartidas de comunicaci√≥n JSON por socket |
 
 ## Diagrama del sistema
 
@@ -17,7 +17,7 @@ Arquitectura distribuida con **sockets TCP** en Python: clientes, balanceador de
 flowchart TB
     subgraph clientes [Clientes]
         WEB[Cliente Web]
-        MOV[Cliente MÛvil]
+        MOV[Cliente M√≥vil]
         CLI[Cliente Python CLI]
     end
 
@@ -41,7 +41,7 @@ flowchart TB
 
 ## Flujo
 
-1. El **cliente** envùa una tarea JSON al **balanceador** (puerto `9000`).
+1. El **cliente** env√≠a una tarea JSON al **balanceador** (puerto `9000`).
 2. El **balanceador** elige un worker disponible (round-robin).
 3. El **worker** encola la tarea y un hilo del pool la procesa.
 4. La respuesta vuelve al cliente por el mismo camino.
@@ -65,37 +65,37 @@ Operaciones: `sumar`, `invertir`, `mayusculas`, `ping`.
 ## Requisitos
 
 - Python 3.10+
-- Solo librerùa estùndar
+- Solo librer√≠a est√°ndar
 
-## Ejecuciùn
+## Ejecuci√≥n
 
 Abrir **5 terminales** en la carpeta del proyecto.
 
-### Terminal 1 ù Worker 1
+### Terminal 1 ‚Äî Worker 1
 
 ```bash
 python worker.py --id 1 --port 9001
 ```
 
-### Terminal 2 ù Worker 2
+### Terminal 2 ‚Äî Worker 2
 
 ```bash
 python worker.py --id 2 --port 9002
 ```
 
-### Terminal 3 ù Worker 3
+### Terminal 3 ‚Äî Worker 3
 
 ```bash
 python worker.py --id 3 --port 9003
 ```
 
-### Terminal 4 ù Balanceador
+### Terminal 4 ‚Äî Balanceador
 
 ```bash
 python balanceador.py
 ```
 
-### Terminal 5 ù Cliente
+### Terminal 5 ‚Äî Cliente
 
 ```bash
 python cliente.py --operacion ping
@@ -117,13 +117,13 @@ Respuesta esperada (ejemplo):
 
 ## Pruebas sugeridas para capturas
 
-1. Tres workers y balanceador en ejecuciùn.
+1. Tres workers y balanceador en ejecuci√≥n.
 2. Cliente enviando tareas y recibiendo resultados.
 3. Varias peticiones seguidas mostrando distintos valores de `"servidor"` en la respuesta.
 
 ## Entregables
 
 - [x] Diagrama del sistema.
-- [x] Cùdigo del balanceador y workers.
-- [x] Cùdigo del cliente.
+- [x] C√≥digo del balanceador y workers.
+- [x] C√≥digo del cliente.
 - [ ] Repositorio en GitHub con capturas de pruebas.
