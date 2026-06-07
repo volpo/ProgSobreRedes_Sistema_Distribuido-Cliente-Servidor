@@ -126,4 +126,4 @@ Respuesta esperada (ejemplo):
 - [x] Diagrama del sistema.
 - [x] Código del balanceador y workers.
 - [x] Código del cliente.
-- [ ] Repositorio en GitHub con capturas de pruebas.
+- [x] Repositorio en GitHub con capturas de pruebas.
