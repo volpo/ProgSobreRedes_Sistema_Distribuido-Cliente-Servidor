@@ -3,10 +3,24 @@ import json
 import socket
 import sys
 
-from protocolo import enviar_json, recibir_json
 
 HOST_DEFAULT = "127.0.0.1"
 PORT_DEFAULT = 9000
+
+
+def enviar_json(conn: socket.socket, data: dict) -> None:
+    mensaje = (json.dumps(data, ensure_ascii=False) + "\n").encode("utf-8")
+    conn.sendall(mensaje)
+
+
+def recibir_json(conn: socket.socket) -> dict:
+    buffer = b""
+    while b"\n" not in buffer:
+        chunk = conn.recv(4096)
+        if not chunk:
+            raise ConnectionError("Conexión cerrada antes de completar el mensaje")
+        buffer += chunk
+    return json.loads(buffer.split(b"\n", 1)[0].decode("utf-8"))
 
 
 def enviar_tarea(host: str, port: int, operacion: str, datos) -> dict:

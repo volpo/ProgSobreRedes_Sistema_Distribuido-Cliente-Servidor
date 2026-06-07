@@ -7,9 +7,7 @@ Arquitectura distribuida con **sockets TCP** en Python: clientes, balanceador de
 | Archivo | Rol |
 |---------|-----|
 | `cliente.py` | Envía tareas y recibe resultados |
-| `balanceador.py` | Simula Nginx/HAProxy; distribuye tareas entre workers |
-| `worker.py` | Servidor worker con pool de hilos que procesa tareas |
-| `protocolo.py` | Utilidades compartidas de comunicación JSON por socket |
+| `servidor.py` | Balanceador de carga y servidores worker (pool de hilos) |
 
 ## Diagrama del sistema
 
@@ -74,25 +72,25 @@ Abrir **5 terminales** en la carpeta del proyecto.
 ### Terminal 1 — Worker 1
 
 ```bash
-python worker.py --id 1 --port 9001
+python servidor.py worker --id 1 --port 9001
 ```
 
 ### Terminal 2 — Worker 2
 
 ```bash
-python worker.py --id 2 --port 9002
+python servidor.py worker --id 2 --port 9002
 ```
 
 ### Terminal 3 — Worker 3
 
 ```bash
-python worker.py --id 3 --port 9003
+python servidor.py worker --id 3 --port 9003
 ```
 
 ### Terminal 4 — Balanceador
 
 ```bash
-python balanceador.py
+python servidor.py balanceador
 ```
 
 ### Terminal 5 — Cliente
